@@ -1,0 +1,9 @@
+john smith:
+  type: character
+  name: John Smith
+  description: The protagonist.
+  "c000": hit by truck-kun.
+  "c003": turns evil.
+  "c100!description": Replaces the default description after this chapter.
+  "c200!!description": Replaces the description and hides previous chapter points.
+  "c201": good again :)

@@ -1,0 +1,59 @@
+---
+import getAllCollections from "@utils/getAllCollections";
+import Chapter from "../../layouts/Chapter.astro";
+
+export async function getStaticPaths() {
+  const allEntries = await getAllCollections();
+
+  // Group by novel/collection
+  const grouped: Record<string, typeof allEntries> = {};
+  for (const entry of allEntries) {
+    if (!grouped[entry.collection]) {
+      grouped[entry.collection] = [];
+    }
+    grouped[entry.collection]!.push(entry);
+  }
+
+  // For each novel, sort and assign prev/next
+  const paths: Array<{
+    params: { novel: string; slug: string };
+    props: typeof allEntries[number] & {
+      data: typeof allEntries[number]["data"];
+      novel: string;
+      prev?: string;
+      next?: string;
+    };
+  }> = [];
+  for (const [novelKey, chapters] of Object.entries(grouped)) {
+    const sorted = chapters.sort((a, b) => a.data.chapter - b.data.chapter);
+    sorted.forEach((chapter, index) => {
+      const prev = sorted[index - 1]?.slug;
+      const next = sorted[index + 1]?.slug;
+      const propsObj: typeof chapter & {
+        data: typeof chapter.data;
+        novel: string;
+        prev?: string;
+        next?: string;
+      } = {
+        ...chapter,
+        data: chapter.data,
+        novel: novelKey,
+      };
+      if (prev !== undefined) propsObj.prev = prev;
+      if (next !== undefined) propsObj.next = next;
+      paths.push({
+        params: { novel: novelKey, slug: chapter.slug },
+        props: propsObj
+      });
+    });
+  }
+  return paths;
+}
+
+const { data, novel, prev, next } = Astro.props;
+const { Content } = await Astro.props.render();
+---
+
+<Chapter {...data} novel={novel} prev={prev} next={next}>
+  <Content />
+</Chapter>

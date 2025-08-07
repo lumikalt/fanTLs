@@ -1,0 +1,73 @@
+---
+import "@styles/chapter.scss";
+import BaseHead from "@components/BaseHead.astro";
+import Header from "@components/Header.astro";
+import TooltipText from "@components/TooltipText.astro";
+import novels from "@novels.yaml";
+import getAllCollections from "@utils/getAllCollections";
+import unreachable from "@utils/unreachable";
+
+export async function getStaticPaths() {
+  return Object.keys(novels).map(novelKey => ({
+    params: { novel: novelKey }
+  }));
+}
+
+const novelKey = Astro.params.novel ?? "";
+const novel = novels[novelKey];
+
+let name = "";
+let author = "";
+let description = "";
+let posts: any[] = [];
+
+if (novel) {
+  ({ name, author, description } = novel);
+  // Fetch all chapters and filter for this novel
+  posts = (await getAllCollections())
+    .filter(entry => entry.collection === novelKey)
+    .sort((a, b) => a.data.chapter - b.data.chapter);
+}
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead
+      title={name || "Novel Not Found"}
+      description={novel ?
+        `${author} - ${description}`
+      : "This novel does not exist."}
+    />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <h1>
+        <div lang="ko" style="font-size: 5rem !important;">
+          예를 들어보시겠어요?
+        </div>
+        <TooltipText text="Do you need" tooltip="[polite]" /> an example?
+      </h1>
+
+      <hr />
+
+      <section>
+        <h2>Chapter List:</h2>
+        <br />
+        {
+          novel ?
+            <ul>
+              {posts.map(post => (
+                <li class="chapter">
+                  <span class="chapter-num">{post.data.chapter}</span>
+                  <a href={`/${novelKey}/${post.slug}/`}>{post.data.title}</a>
+                </li>
+              ))}
+            </ul>
+          : unreachable()
+        }
+      </section>
+    </main>
+  </body>
+</html>

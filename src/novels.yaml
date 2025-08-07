@@ -1,0 +1,6 @@
+some_name:
+  name: Some Name
+  image: "some name.pmg"
+  path: "some_name"
+  language: "en"
+

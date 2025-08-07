@@ -1,0 +1,10 @@
+earth:
+  type: location
+  name: Earth
+  description: Our home planet
+
+yggdrasil:
+  type: location
+  name: Yggdrasil
+  description: The Tree of Life from the Nordic Mythos.
+  "c003": not a tree.

@@ -1,5 +1,5 @@
-// Place any global data in this file.
-// You can import this data from anywhere in your site by using the `import` keyword.
-
-export const SITE_TITLE = 'Astro Blog';
-export const SITE_DESCRIPTION = 'Welcome to my website!';
+export const SITE_TITLE = "EpicTLs";
+export const SITE_DESCRIPTION = "The most awesomest translation group!!";
+export const SITE_AUTHOR = "EpicTLs Team";
+export const DEFAULT_LANGUAGE = "en";
+export const SITE_URL = "http://127.0.0.1:4321/";

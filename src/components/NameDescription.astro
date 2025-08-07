@@ -1,0 +1,9 @@
+---
+import nameLookup from "@utils/nameLookup";
+
+const { novel, name } = Astro.props;
+
+const description = nameLookup(novel, name);
+
+
+---

@@ -1,0 +1,62 @@
+---
+import "../styles/chapter.scss";
+
+import BaseHead from "../components/BaseHead.astro";
+import { DEFAULT_LANGUAGE, SITE_AUTHOR } from "../consts";
+
+type Props = {
+  title: string;
+  chapter: number;
+  author?: string | undefined;
+  date: Date;
+  novel: string;
+  prev?: string | undefined;
+  next?: string | undefined;
+};
+
+const { title, author = SITE_AUTHOR, chapter, novel, prev, next } = Astro.props;
+---
+
+<html lang={DEFAULT_LANGUAGE}>
+  <head>
+    <BaseHead title={`(${chapter}) ${title}`} description={`By ${author}`} />
+  </head>
+
+  <body>
+    <nav>
+      {
+        prev ?
+          <a href={`/${novel}/${prev}`}>{"<<<"}</a>
+        : <span class="disabled">{"<<<"}</span>
+      }
+      <a href={`/${novel}/`}>Index</a>
+      {
+        next ?
+          <a href={`/${novel}/${next}`}>{">>>"}</a>
+        : <span class="next-link disabled">{">>>"}</span>
+      }
+    </nav>
+
+    <hr />
+    <main>
+      <article>
+        <slot />
+      </article>
+    </main>
+    <hr />
+
+    <nav>
+      {
+        prev ?
+          <a href={`/${novel}/${prev}`}>{"<<<"}</a>
+        : <span class="disabled">{"<<<"}</span>
+      }
+      <a href={`/${novel}/`}>Index</a>
+      {
+        next ?
+          <a href={`/${novel}/${next}`}>{">>>"}</a>
+        : <span class="next-link disabled">{">>>"}</span>
+      }
+    </nav>
+  </body>
+</html>

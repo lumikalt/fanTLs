@@ -1,18 +1,35 @@
 {
-  "name": "",
+  "name": "lumi_homepage",
   "type": "module",
   "version": "0.0.1",
+  "private": true,
   "scripts": {
     "dev": "astro dev",
+    "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.3",
-    "@astrojs/rss": "^4.0.12",
-    "@astrojs/sitemap": "^3.4.2",
-    "astro": "^5.12.8",
-    "sharp": "^0.34.2"
+    "@astrojs/mdx": "latest",
+    "@astrojs/rss": "latest",
+    "@astrojs/sitemap": "latest",
+    "@astrojs/vercel": "latest",
+    "astro": "latest",
+    "autoprefixer": "latest",
+    "cssnano": "latest",
+    "rehype-katex": "latest",
+    "remark-math": "latest",
+    "rollup": "latest",
+    "sass": "latest",
+    "sharp": "latest",
+    "yaml": "latest",
+    "fast-glob": "latest"
+  },
+  "devDependencies": {
+    "@types/hast": "^3.0.4",
+    "rehype": "^13.0.2",
+    "unist-util-visit": "latest",
+    "vite-plugin-yaml2": "latest"
   }
 }
