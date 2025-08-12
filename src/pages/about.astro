@@ -1,0 +1,29 @@
+---
+import "../styles/chapter.scss";
+
+import BaseHead from "../components/BaseHead.astro";
+import { SITE_TITLE } from "../consts";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead />
+
+    <!-- Heavier fonts -->
+    <style is:global>
+      @font-face {
+        font-family: Cookies;
+        font-display: swap;
+        src: url("/font/Cookies.otf") format("opentype");
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <h1>{SITE_TITLE}</h1>
+
+    </main>
+  </body>
+</html>
