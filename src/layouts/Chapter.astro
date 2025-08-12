@@ -3,9 +3,10 @@ import "../styles/chapter.scss";
 
 import BaseHead from "../components/BaseHead.astro";
 import { DEFAULT_LANGUAGE, SITE_AUTHOR } from "../consts";
+import { eraseTooltip } from "@utils/parseTooltip";
 
 type Props = {
-  title: string;
+  name: string;
   chapter: number;
   author?: string | undefined;
   date: Date;
@@ -14,12 +15,12 @@ type Props = {
   next?: string | undefined;
 };
 
-const { title, author = SITE_AUTHOR, chapter, novel, prev, next } = Astro.props;
+const { name, author = SITE_AUTHOR, chapter, novel, prev, next } = Astro.props;
 ---
 
 <html lang={DEFAULT_LANGUAGE}>
   <head>
-    <BaseHead title={`(${chapter}) ${title}`} description={`By ${author}`} />
+    <BaseHead title={`(${chapter}) - ${eraseTooltip(name)}`} description={`By ${author}`} />
   </head>
 
   <body>
