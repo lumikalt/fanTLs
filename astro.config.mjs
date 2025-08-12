@@ -6,6 +6,7 @@ import mdx from "@astrojs/mdx";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import rehypeBetterTooltips from "./src/utils/rehype-better-tooltips";
+import rehypeIdent from "./src/utils/rehype-ident";
 
 import sitemap from "@astrojs/sitemap";
 
@@ -19,7 +20,7 @@ export default defineConfig({
   integrations: [mdx(), sitemap()],
   markdown: {
     remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeKatex, rehypeBetterTooltips]
+    rehypePlugins: [rehypeKatex, rehypeBetterTooltips, rehypeIdent],
   },
   adapters: [
     vercel({
