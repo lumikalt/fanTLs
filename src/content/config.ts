@@ -11,7 +11,7 @@ export const collectionNames = Array.from(
 
 // Shared schema for all collections
 const schema = z.object({
-  title: z.string(),
+  name: z.string(),
   author: z.string().optional(),
   chapter: z.number().positive().or(z.literal(0)),
   date: z.string().or(z.date()).transform(val => new Date(val)),
