@@ -18,17 +18,17 @@
     "astro": "latest",
     "autoprefixer": "latest",
     "cssnano": "latest",
+    "fast-glob": "latest",
     "rehype-katex": "latest",
     "remark-math": "latest",
     "rollup": "latest",
     "sass": "latest",
     "sharp": "latest",
-    "yaml": "latest",
-    "fast-glob": "latest"
+    "yaml": "latest"
   },
   "devDependencies": {
-    "@types/hast": "^3.0.4",
-    "rehype": "^13.0.2",
+    "@types/hast": "latest",
+    "rehype": "latest",
     "unist-util-visit": "latest",
     "vite-plugin-yaml2": "latest"
   }
