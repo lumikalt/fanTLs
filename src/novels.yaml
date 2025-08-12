@@ -1,9 +1,10 @@
 some_name:
   name: "{{Some Name} 名前, an untranslatable Japanese saying.}"
-  description: "I'm {{John Smith} awoo}. On the {{night} ga} I was hit by a truck while on my way home, suddenly...\n\nI woke up in a fantasy world."
+  description: "I'm {{John Smith} the one and only.}. On the {{night} after midnight} I was hit by a truck while on my way home, suddenly...\n\nI woke up in a fantasy world."
   image: "some name.pmg"
   path: "some_name"
   language: "en"
+  tags: ["comedy", "horror", "romance", "sci-fi"]
 
 another:
   name: Another Novel
@@ -11,3 +12,4 @@ another:
   image: ""
   path: "another"
   language: "fr"
+  tags: ["bl"]
