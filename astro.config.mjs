@@ -14,10 +14,12 @@ import vercel from "@astrojs/vercel";
 
 import yaml from 'vite-plugin-yaml2';
 
+import db from "@astrojs/db";
+
 // https://astro.build/config
 export default defineConfig({
   site: SITE_URL,
-  integrations: [mdx(), sitemap()],
+  integrations: [mdx(), sitemap(), db()],
   markdown: {
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex, rehypeBetterTooltips, rehypeIdent],
