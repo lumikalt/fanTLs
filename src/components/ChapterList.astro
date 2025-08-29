@@ -1,0 +1,15 @@
+---
+export interface ChapterPost {
+  slug: string;
+  collection: string;
+  data: { chapter: number; name: string };
+}
+
+interface Props {
+  novel: string;
+  posts: ChapterPost[];
+  pageSize?: number;
+}
+
+const { novel, posts, pageSize = 20 } = Astro.props as Props;
+---
