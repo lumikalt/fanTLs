@@ -27,9 +27,7 @@ export default defineConfig({
   adapters: [
     vercel({
       imageService: true,
-      isr: {
-        expiration: 60 * 60 * 24
-      },
+      isr: true,
       webAnalytics: {
         enabled: true
       }
