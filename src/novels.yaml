@@ -1,5 +1,5 @@
 some_name:
-  name: "{{Some Name} 名前, an untranslatable Japanese saying.}"
+  name: "{{生きる} \"to live\", but this translation leaves out a lot of the nuance/context!}"
   description: "I'm {{John Smith} the one and only.}. On the {{night} after midnight} I was hit by a truck while on my way home, suddenly...\n\nI woke up in a fantasy world."
   image: "some name.pmg"
   path: "some_name"

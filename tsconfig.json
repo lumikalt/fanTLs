@@ -13,7 +13,8 @@
       "@content/config": ["content/config.ts"],
       "@consts": ["consts.ts"],
       "@novels": ["novels.yaml"],
-      "@novels.yaml": ["novels.yaml"]
+      "@novels.yaml": ["novels.yaml"],
+      "@types": ["types/"]
     }
   },
   "include": ["src"]
