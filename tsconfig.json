@@ -1,5 +1,5 @@
 {
-  "extends": "astro/tsconfigs/strictest",
+  "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "types": ["astro/client"],
     "baseUrl": "./src",
@@ -14,8 +14,8 @@
       "@consts": ["consts.ts"],
       "@novels": ["novels.yaml"],
       "@novels.yaml": ["novels.yaml"],
-      "@types": ["types/"]
+      "@types": ["types/*"]
     }
   },
-  "include": ["src"]
+  "include": [".astro/types.d.ts", "src"]
 }
