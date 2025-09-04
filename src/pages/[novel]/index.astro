@@ -1,16 +1,20 @@
 ---
 import "@styles/chapter.scss";
+
+import { db, eq, Novel, Comment } from "astro:db";
+import buildCommentTree from "@utils/buildCommentTree";
 import BaseHead from "@components/BaseHead.astro";
 import Header from "@components/Header.astro";
 import TooltipText from "@components/TooltipText.astro";
-import novels from "@novels.yaml";
 import getAllCollections from "@utils/getAllCollections";
 import parseTooltip, { eraseTooltip } from "@utils/parseTooltip";
-import { Fragment } from "astro/jsx-runtime";
 import ChapterList from "@components/ChapterList.astro";
+import { getNovels } from "@utils/validateNovels";
+
+const novels = getNovels();
 
 export async function getStaticPaths() {
-  return Object.keys(novels).map(novelKey => ({
+  return Object.keys(getNovels()).map(novelKey => ({
     params: { novel: novelKey }
   }));
 }
@@ -18,13 +22,14 @@ export async function getStaticPaths() {
 const novelKey = Astro.params.novel ?? "";
 const novel = novels[novelKey];
 
+let path = "";
 let title = "";
 let author = "";
 let description = "";
 let posts: any[] = [];
 
 if (novel) {
-  ({ name: title, author, description } = novel);
+  ({ path = "", title = "", author = "", description = "" } = novel);
   // Fetch all chapters and filter for this novel
   posts = (await getAllCollections())
     .filter(entry => entry.collection === novelKey)

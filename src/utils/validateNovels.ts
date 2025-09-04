@@ -1,6 +1,6 @@
-// src/utils/validateNovels.ts
 import rawNovels from "@novels.yaml";
-import { NovelsFileSchema } from "@types/novels";
+import { NovelsFileSchema } from "src/types/novels";
+
 
 export function getNovels() {
   const parsed = NovelsFileSchema.safeParse(rawNovels);

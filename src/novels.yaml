@@ -1,5 +1,5 @@
 some_name:
-  name: "{{生きる} \"to live\", but this translation leaves out a lot of the nuance/context!}"
+  title: "{{生きる} \"to live\", but this translation leaves out a lot of the nuance/context!}"
   description: "I'm {{John Smith} the one and only.}. On the {{night} after midnight} I was hit by a truck while on my way home, suddenly...\n\nI woke up in a fantasy world."
   image: "some name.pmg"
   path: "some_name"
@@ -7,7 +7,7 @@ some_name:
   tags: ["comedy", "horror", "romance", "sci-fi"]
 
 another:
-  name: Another Novel
+  title: "Another Novel"
   description: ""
   image: ""
   path: "another"
