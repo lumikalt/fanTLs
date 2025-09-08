@@ -3,6 +3,7 @@ import "@styles/chapter.scss";
 
 import { db, eq, Novel, Comment } from "astro:db";
 import buildCommentTree from "@utils/buildCommentTree";
+import { formatText } from "@utils/parseText";
 import BaseHead from "@components/BaseHead.astro";
 import Header from "@components/Header.astro";
 import TooltipText from "@components/TooltipText.astro";
@@ -10,6 +11,7 @@ import getAllCollections from "@utils/getAllCollections";
 import parseTooltip, { eraseTooltip } from "@utils/parseTooltip";
 import ChapterList from "@components/ChapterList.astro";
 import { getNovels } from "@utils/validateNovels";
+import Comments from "@components/Comments.astro";
 
 const novels = getNovels();
 
@@ -36,12 +38,32 @@ if (novel) {
     .sort((a, b) => a.data.chapter - b.data.chapter);
 }
 
+description = await formatText(description);
+
 // Prepare serializable posts for the client island
 const safePosts = posts.map(p => ({
   slug: p.slug,
   collection: p.collection,
   data: { chapter: p.data.chapter, name: p.data.name }
 }));
+
+const tryId = await db.select().from(Novel).where(eq(Novel.name, path));
+let novelId = 0;
+if (tryId.length > 0) {
+  novelId = tryId[0].id;
+} else {
+  throw new Error(`Novel with name "${path}" not found in database.`);
+}
+
+// Base comments
+let comments = await db
+  .select()
+  .from(Comment)
+  .where(eq(Comment.targetType, "novel"))
+  .where(eq(Comment.targetId, novelId))
+  .orderBy("createdAt", "desc");
+
+let commentsTree = await buildCommentTree(comments);
 ---
 
 <!doctype html>
@@ -63,24 +85,30 @@ const safePosts = posts.map(p => ({
           parseTooltip(title).map((part, idx) =>
             part.type === "text" ?
               part.value
-            : <TooltipText key={idx} text={part.text} tooltip={part.tooltip} />
+            : <TooltipText text={part.text!} tooltip={part.tooltip!} />
           )
         }
       </h1>
 
+      <br />
+
       <p class="description">
         {
-          parseTooltip(description).map((part, idx) =>
+          parseTooltip(description).map((part, _) =>
             part.type === "text" ?
-              part.value
-            : <TooltipText key={idx} text={part.text} tooltip={part.tooltip} />
+              <span set:html={part.value!.replace(/\n/g, "<br />")} />
+            : <TooltipText text={part.text!} tooltip={part.tooltip!} />
           )
         }
       </p>
 
+      <ChapterList novel={novelKey} posts={safePosts} pageSize={20} />
+
       <br />
 
-      <ChapterList novel={novelKey} posts={safePosts} pageSize={20} />
+      <div class="comment-list" aria-label="Comments">
+        <Comments comments={commentsTree} />
+      </div>
     </main>
   </body>
 </html>
