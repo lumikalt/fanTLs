@@ -11,17 +11,18 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/db": "^0.17.1",
+    "@astrojs/db": "latest",
     "@astrojs/mdx": "latest",
     "@astrojs/rss": "latest",
     "@astrojs/sitemap": "latest",
     "@astrojs/vercel": "latest",
+    "@js-temporal/polyfill": "latest",
     "astro": "latest",
     "autoprefixer": "latest",
     "cssnano": "latest",
+    "sanitize-html": "latest",
     "fast-glob": "latest",
-    "rehype-katex": "latest",
-    "remark-math": "latest",
+    "marked": "latest",
     "rollup": "latest",
     "sass": "latest",
     "sharp": "latest",
@@ -29,6 +30,7 @@
   },
   "devDependencies": {
     "@types/hast": "latest",
+    "@types/sanitize-html": "latest",
     "rehype": "latest",
     "unist-util-visit": "latest",
     "vite-plugin-yaml2": "latest"
