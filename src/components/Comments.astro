@@ -1,0 +1,39 @@
+---
+import type { CommentWithReplies } from "@utils/buildCommentTree";
+import Comments from "@components/Comments.astro";
+import formatRelativeTime from "@utils/formatTime";
+import { formatText } from "@utils/parseText";
+
+interface Props {
+  comments: CommentWithReplies[];
+  depth?: number;
+}
+
+const { comments, depth = 0 } = Astro.props;
+---
+
+<div class="comments">
+  {
+    comments.map(c => (
+      <div class="comment" data-depth={depth}>
+        <div class="body">
+          <span class="header">
+            <strong>{c.username}</strong>
+            <div class="empty" />
+            <time datetime={c.createdAt.toISOString()} title={c.createdAt.toLocaleString("en-uk")}>
+              {formatRelativeTime(c.createdAt)}
+            </time>
+          </span>
+
+          <div class="text" set:html={formatText(c.text)} />
+
+          {c.replies.length > 0 && (
+            <div class="replies">
+              <Comments comments={c.replies} depth={depth + 1} />
+            </div>
+          )}
+        </div>
+      </div>
+    ))
+  }
+</div>

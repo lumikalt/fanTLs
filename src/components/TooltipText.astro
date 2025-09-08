@@ -1,4 +1,10 @@
 ---
+type Props = {
+  text: string;
+  tooltip: string;
+  className?: string;
+};
+
 const { text, tooltip, className = "" } = Astro.props;
 ---
 
